@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_24_172034) do
+ActiveRecord::Schema.define(version: 2021_06_25_060511) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,6 +51,23 @@ ActiveRecord::Schema.define(version: 2021_06_24_172034) do
     t.index ["company_id"], name: "index_ships_on_company_id"
   end
 
+  create_table "trips", force: :cascade do |t|
+    t.decimal "price"
+    t.bigint "ship_id", null: false
+    t.bigint "company_id", null: false
+    t.date "departure_date"
+    t.time "departure_time"
+    t.time "arrival_time"
+    t.bigint "departure_city_id"
+    t.bigint "arrival_city_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["arrival_city_id"], name: "index_trips_on_arrival_city_id"
+    t.index ["company_id"], name: "index_trips_on_company_id"
+    t.index ["departure_city_id"], name: "index_trips_on_departure_city_id"
+    t.index ["ship_id"], name: "index_trips_on_ship_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -65,4 +82,8 @@ ActiveRecord::Schema.define(version: 2021_06_24_172034) do
 
   add_foreign_key "companies", "cities"
   add_foreign_key "ships", "companies"
+  add_foreign_key "trips", "cities", column: "arrival_city_id"
+  add_foreign_key "trips", "cities", column: "departure_city_id"
+  add_foreign_key "trips", "companies"
+  add_foreign_key "trips", "ships"
 end
