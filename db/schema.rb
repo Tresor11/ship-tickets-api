@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_25_060511) do
+ActiveRecord::Schema.define(version: 2021_06_26_060034) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,6 +43,12 @@ ActiveRecord::Schema.define(version: 2021_06_25_060511) do
     t.index ["city_id"], name: "index_companies_on_city_id"
   end
 
+  create_table "frequencies", force: :cascade do |t|
+    t.string "frequency"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "ships", force: :cascade do |t|
     t.string "name"
     t.bigint "company_id", null: false
@@ -55,8 +61,9 @@ ActiveRecord::Schema.define(version: 2021_06_25_060511) do
     t.decimal "price"
     t.bigint "ship_id", null: false
     t.bigint "company_id", null: false
-    t.datetime "departure_date"
-    t.integer "duration"
+    t.bigint "frequency_id", null: false
+    t.string "departure_time"
+    t.string "trip_duration"
     t.bigint "departure_city_id"
     t.bigint "arrival_city_id"
     t.datetime "created_at", precision: 6, null: false
@@ -64,6 +71,7 @@ ActiveRecord::Schema.define(version: 2021_06_25_060511) do
     t.index ["arrival_city_id"], name: "index_trips_on_arrival_city_id"
     t.index ["company_id"], name: "index_trips_on_company_id"
     t.index ["departure_city_id"], name: "index_trips_on_departure_city_id"
+    t.index ["frequency_id"], name: "index_trips_on_frequency_id"
     t.index ["ship_id"], name: "index_trips_on_ship_id"
   end
 
@@ -84,5 +92,6 @@ ActiveRecord::Schema.define(version: 2021_06_25_060511) do
   add_foreign_key "trips", "cities", column: "arrival_city_id"
   add_foreign_key "trips", "cities", column: "departure_city_id"
   add_foreign_key "trips", "companies"
+  add_foreign_key "trips", "frequencies"
   add_foreign_key "trips", "ships"
 end
