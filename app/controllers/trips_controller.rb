@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class TripController < ApplicationController
+class TripsController < ApplicationController
   def index
     cities = Trip.all
     json_response(cities)
