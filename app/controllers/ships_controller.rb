@@ -2,12 +2,12 @@
 
 class ShipsController < ApplicationController
   def index
-    cities = Ship.all
-    json_response(cities)
+    @ships = Ship.all
+    json_response(@ships)
   end
 
   def show
-    city = Ship.find(params[:id])
-    json_response(city)
+    ship = Ship.find(params[:id])
+    json_response(ship)
   end
 end

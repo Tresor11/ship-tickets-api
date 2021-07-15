@@ -1,11 +1,11 @@
 class FrequenciesController < ApplicationController
   def index
-    cities = Frequency.all
-    json_response(cities)
+    @frequencies = Frequency.all
+    json_response(@frequencies)
   end
 
   def show
-    city = Frequency.find(params[:id])
-    json_response(city)
+    frequency = Frequency.find(params[:id])
+    json_response(frequency)
   end
 end

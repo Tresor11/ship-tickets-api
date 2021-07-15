@@ -2,12 +2,12 @@
 
 class TripsController < ApplicationController
   def index
-    cities = Trip.all
-    json_response(cities)
+    @trips = Trip.all.includes(:city, :company, :ship)
+    json_response(@trips)
   end
 
   def show
-    city = Trip.find(params[:id])
-    json_response(city)
+    trip = Trip.find(params[:id])
+    json_response(trip)
   end
 end

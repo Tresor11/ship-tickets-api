@@ -2,12 +2,12 @@
 
 class CompaniesController < ApplicationController
   def index
-    cities = Company.all
-    json_response(cities)
+    @companies = Company.all
+    json_response(@companies)
   end
 
   def show
-    city = Company.find(params[:id])
-    json_response(city)
+    company = Company.find(params[:id])
+    json_response(company)
   end
 end

@@ -2,7 +2,7 @@
 
 class CitiesController < ApplicationController
   def index
-    cities = City.all
+    @cities = City.all
     json_response(cities)
   end
 
