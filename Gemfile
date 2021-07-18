@@ -32,6 +32,7 @@ gem 'activeadmin'
 # Plus integrations with:
 gem 'cancancan'
 gem 'devise'
+gem 'rack-cors'
 # gem 'draper'
 # gem 'pundit'
 
