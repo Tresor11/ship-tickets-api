@@ -1,7 +1,5 @@
 # Ship-tickets API
 
-> This project is an Api for a [React-app](https://resell-app.netlify.app/).
-
 This API is made of these models:
 - Ship model
 - User model
