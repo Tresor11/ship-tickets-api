@@ -6,4 +6,5 @@ class Trip < ApplicationRecord
   belongs_to :ship
   belongs_to :company
   belongs_to :frequency
+  belongs_to :departure_day
 end
